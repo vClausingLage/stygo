@@ -18,19 +18,39 @@ $data = json_decode($data);
 ?>
 </div>
 
-<h1>How angry was Greek Tragedy?</h1>
+<h1>How <span style='color: #FD3A0F'>angry</span> was Greek Tragedy?</h1>
 
-<h2>discover how often the three great tragedists use words of anger or words of love[1]</h2>
+<h2>discover how often the three great tragedists use words of <span style='color: #FD3A0F'>anger</span> or words of <span style='color: #CBE432'>love</span><sup>[1]</sup></h2>
 
-<div id='svg'>
+
+
+<div class='flex'>
+<div class='title'>
+<h3>Euripides</h3>
+<div id='eur'>
+</div>
+</div>
+<div class='title'>
+<h3>Aeschylus</h3>
+<div id='aesch'>
+</div>
+</div>
+<ul class='colors'>
+  <li style='color: #FD3A0F; padding: 1rem'>ANGRY</li> 
+  <li style='color: #C21460; padding: 1rem'>NASTY</li> 
+  <li style='color: #CBE432; padding: 1rem'>AFFECTIONATE</li> 
+  <li style='color: #98CA32; padding: 1rem'>NICE</li>
+</ul>
 </div>
 
 <p>[1] Click here for a list of words that underlie the statistical analysis:
 <br></br>
-<button>show list</button>
-<div>
+<button onclick=showList()>show list</button>
+<div style='display: none' id='list'>
   <ul>
-
+    <p>! under construction !</p>
+    <p>angry</p>
+    <li></li>
   </ul>
 </div>
 </p>
@@ -39,19 +59,19 @@ $data = json_decode($data);
 let data = '<?php echo json_encode($data); ?>'
 data = JSON.parse(data)
 
-function setSVG(data) {
+function setSVG(data, author) {
   let angry = data.angry
   let nasty = data.nasty
   let affectionate = data.affectionate
   let nice = data.nice
 
-  let startVector = [200,200]
+  let startVector = [120,120]
   let accelerator = 10000
 
-  let angryColor = 'red'
-  let nastyColor = 'gray'
-  let affectionateColor = 'yellow'
-  let niceColor = 'blue'
+  let angryColor = '#FD3A0F'
+  let nastyColor = '#C21460'
+  let affectionateColor = '#CBE432'
+  let niceColor = '#98CA32'
 
   let angryVector = [startVector[0],startVector[1],angry * accelerator,angryColor]
   let nastyVector = [startVector[0] + (angry * accelerator + nasty * accelerator),startVector[1],nasty * accelerator,nastyColor]
@@ -60,10 +80,10 @@ function setSVG(data) {
 
   let vectors = [angryVector,nastyVector,affectionateVector,niceVector] // d[0] = x-axis d[1] = y-axis d[2] = radius
 
-  let selector = d3.select('#svg')
+  let selector = d3.select(`#${author}`)
     .append('svg')
-    .attr('width', 500)
-    .attr('height', 500)
+    .attr('width', 400)
+    .attr('height', 300)
 
   let figures = selector.selectAll('forms')
     .data(vectors)
@@ -77,9 +97,17 @@ function setSVG(data) {
     .style('fill', function (d) { return d[3] })
   return data
 }
-console.log(setSVG(data[1]))
+console.log(setSVG(data[1], 'eur'))
+console.log(setSVG(data[0], 'aesch'))
 
-
+function showList() {
+  var x = document.getElementById('list');
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 
 
