@@ -22,8 +22,6 @@ $data = json_decode($data);
 
 <h2>discover how often the three great tragedists use words of <span style='color: #FD3A0F'>anger</span> or words of <span style='color: #CBE432'>love</span><sup>[1]</sup></h2>
 
-
-
 <div class='flex'>
 <div class='title'>
 <h3>Euripides</h3>
