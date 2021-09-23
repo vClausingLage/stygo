@@ -4,13 +4,14 @@ import glob
 
 txt_files = glob.glob('*.txt')
 
+text_total = []
+
 for idx, el in enumerate(txt_files):
-    # solution looping through TXT 
-    # save to variable (append) ?
-    with open('tragedists.txt', 'r', encoding='utf8') as file:
+    with open(el, 'r', encoding='utf8') as file:
         text = file.read()
         text = json.loads(text)
-
+        text = " ".join(text)
+        text_total.append(text)
 
 text_str = " ".join(text)
 
