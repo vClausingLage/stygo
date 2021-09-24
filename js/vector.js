@@ -38,8 +38,8 @@ function setSVG(data, author) {
     .style('fill', function (d) { return d[3] })
   return data
 }
-console.log(setSVG(data[1], 'eur'))
 console.log(setSVG(data[0], 'aesch'))
+console.log(setSVG(data[1], 'eur'))
 
 function showList() {
   var x = document.getElementById('list');

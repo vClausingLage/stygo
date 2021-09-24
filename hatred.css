@@ -4,11 +4,6 @@ html {
   background-color: #EFE2BA;
 }
 
-canvas { 
-  width: 100%; 
-  height: 100% 
-}
-
 .container {
   margin-left: 1rem;
   margin-right: 1rem
@@ -19,21 +14,27 @@ h1, h2, h3, p {
   font-family: 'Antic Slab';
 }
 
-.title {
-  text-align: center;
-}
-
-.colors {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: center;
-  justify-content: center;
-  list-style: none;
-  background-color: white;
-}
-
 .flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.title {
+  text-align: center;
+}
+
+.legende {
+  display: inline;
+  background-color: white;
+  max-height: 4rem;
+}
+
+.colors {
+  list-style: none;
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  background-color: white;
 }

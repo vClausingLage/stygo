@@ -23,21 +23,24 @@ $data = json_decode($data);
 
 <div class='flex'>
 <div class='title'>
-<h3>Euripides</h3>
+<h2>Euripides</h2>
 <div id='eur'>
 </div>
 </div>
 <div class='title'>
-<h3>Aeschylus</h3>
+<h2>Aeschylus</h2>
 <div id='aesch'>
 </div>
 </div>
+<div class='legende'>
+<h2>Legend</h2>
 <ul class='colors'>
   <li style='color: #FD3A0F; padding: 1rem'>ANGRY</li> 
   <li style='color: #C21460; padding: 1rem'>NASTY</li> 
   <li style='color: #CBE432; padding: 1rem'>AFFECTIONATE</li> 
   <li style='color: #98CA32; padding: 1rem'>NICE</li>
 </ul>
+</div>
 </div>
 
 <p>[1] Click here for a list of words that underlie the statistical analysis:
