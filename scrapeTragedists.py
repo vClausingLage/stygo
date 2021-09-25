@@ -50,46 +50,58 @@ data = [
 
 # GET PAGES // LOOP AUTHORS! ! !
 def getPages(data):
-    results_pages = []
     for el in data:
-        url = el[1]
-        print(url)
-    for el in url:
-        URL = el + str(1)
-        page = requests.get(URL)
-        soup = BeautifulSoup(page.content, "html.parser")
-        result_pages = soup.find_all("div", class_="sidetoc mbot ind0")
-        for result in result_pages:
-            result = result.find_all("a")
-            for el in result:
-                el = el.text
-                el = re.sub("lines\s", "", el)
-                el = re.sub("line\s", "", el)
-                el = re.sub("ff.", "", el)
-                el = el.split("-")
-                if len(el) > 1:
-                    results_pages.append(el[1])
-                else:
-                    results_pages.append(el[0])
-    return results_pages
+        results_pages = []
+        urls = el["urls"]
+        for url in urls:
+            URL = url + str(1)
+            page = requests.get(URL)
+            soup = BeautifulSoup(page.content, "html.parser")
+            result_pages = soup.find_all("div", class_="sidetoc mbot ind0")
+            for results in result_pages:
+                results = results.find_all("a")
+                for result in results:
+                    result = result.text
+                    result = re.sub("lines\s", "", result)
+                    result = re.sub("line\s", "", result)
+                    result = re.sub("ff.", "", result)
+                    result = result.split("-")
+                    if len(result) > 1:
+                        results_pages.append(result[1])
+                    else:
+                        results_pages.append(result[0])
+        el["pages"] = [results_pages]
+            
+
+
+#for page in results_pages:
+#                URL = url + page
+#                page = requests.get(URL)
+#                soup = BeautifulSoup(page.content, "html.parser")
+#                results = soup.find_all("a", class_="text")
+#                for result in results:
+#                    word_list.append(result.text)
+#            el["pages"] = results_pages
+#            el["text"] = word_list
+
 
 # REPLACE TEST URLS !!!
-result_pages = NEWgetContent(test_urls)
-print(result_pages)
+pages = getPages(data)
+print(pages)
 
-def getContent(page, url):
-    word_list = []
-    URL = url + page
-    page = requests.get(URL)
-    soup = BeautifulSoup(page.content, "html.parser")
-    results = soup.find_all("a", class_="text")
-    for result in results:
-        word_list.append(result.text)
-    return word_list
+#def getContent(page, url):
+#    word_list = []
+#    URL = url + page
+#    page = requests.get(URL)
+#    soup = BeautifulSoup(page.content, "html.parser")
+#    results = soup.find_all("a", class_="text")
+#    for result in results:
+#        word_list.append(result.text)
+#    return word_list
 
 #new_result = []
 #for page in pages:
 #    new_result.append(getContent(page, url))
     
-#with open(".txt", "w") as file:
-#    file.write(str(new_result))
+with open("data.txt", "w") as file:
+    file.write(str(pages))
