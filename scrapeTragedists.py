@@ -2,7 +2,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-aeschylus_url = [
+aeschylus_urls = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0003%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0005%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0007%3Acard%3D",
@@ -11,7 +11,7 @@ aeschylus_url = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0013%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0015%3Acard%3D"
 ]
-sophocles_url = [
+sophocles_urls = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0183%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0185%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0187%3Acard%3D",
@@ -20,7 +20,7 @@ sophocles_url = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0193%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0195%3Acard%3D"
 ]
-euripides_url = [
+euripides_urls = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0087%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0089%3Acard%3D",
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0091%3Acard%3D",
@@ -42,15 +42,19 @@ euripides_url = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0123%3Acard%3D"
 ]
 
-pages = []
+data = [
+{"author": "aeschylus", "urls": aeschylus_urls, "pages": [], "text": ""},
+{"author": "sophocles", "urls": sophocles_urls, "pages": [], "text": ""},
+{"author": "euripides", "urls": euripides_urls, "pages": [], "text": ""}
+]
 
-urls = aeschylus_url + sophocles_url + euripides_url
-test_urls = urls[:3]
-
-# REPLACE TEST URLS !!!
-def NEWgetContent(test_urls):
+# GET PAGES // LOOP AUTHORS! ! !
+def getPages(data):
     results_pages = []
-    for el in test_urls:
+    for el in data:
+        url = el[1]
+        print(url)
+    for el in url:
         URL = el + str(1)
         page = requests.get(URL)
         soup = BeautifulSoup(page.content, "html.parser")
@@ -58,9 +62,15 @@ def NEWgetContent(test_urls):
         for result in result_pages:
             result = result.find_all("a")
             for el in result:
-                results_pages.append(el.text)
-    for el in results_pages:
-        el = re.sub("lines\s", "", el)
+                el = el.text
+                el = re.sub("lines\s", "", el)
+                el = re.sub("line\s", "", el)
+                el = re.sub("ff.", "", el)
+                el = el.split("-")
+                if len(el) > 1:
+                    results_pages.append(el[1])
+                else:
+                    results_pages.append(el[0])
     return results_pages
 
 # REPLACE TEST URLS !!!
