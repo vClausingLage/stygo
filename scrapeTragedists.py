@@ -108,8 +108,6 @@ print(data)
 
 
 # REPLACE TEST URLS !!!
-pages = getPages(data)
-print(pages)
 
 #def getContent(page, url):
 #    word_list = []
@@ -126,4 +124,4 @@ print(pages)
 #    new_result.append(getContent(page, url))
     
 with open("data.txt", "w") as file:
-    file.write(str(pages))
+    file.write(str(data))
