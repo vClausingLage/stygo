@@ -1,6 +1,7 @@
 import re
 import requests
 from bs4 import BeautifulSoup
+from requests.api import request
 
 aeschylus_urls = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0003%3Acard%3D",
@@ -43,19 +44,22 @@ euripides_urls = [
 ]
 
 data = [
-{"author": "aeschylus", "urls": aeschylus_urls, "pages": [], "text": ""},
-{"author": "sophocles", "urls": sophocles_urls, "pages": [], "text": ""},
-{"author": "euripides", "urls": euripides_urls, "pages": [], "text": ""}
+{"author": "aeschylus", "urls": aeschylus_urls, "pages": [], "text": []},
+{"author": "sophocles", "urls": sophocles_urls, "pages": [], "text": []},
+{"author": "euripides", "urls": euripides_urls, "pages": [], "text": []}
 ]
 
 # GET PAGES // LOOP AUTHORS! ! !
 def getPages(data):
     for el in data:
-        results_pages = []
+        pages_total = []
+        word_list = []
         urls = el["urls"]
         for url in urls:
-            URL = url + str(1)
-            page = requests.get(URL)
+            # get pages for URL scraping
+            pages = []
+            URL_pages = url + str(1)
+            page = requests.get(URL_pages)
             soup = BeautifulSoup(page.content, "html.parser")
             result_pages = soup.find_all("div", class_="sidetoc mbot ind0")
             for results in result_pages:
@@ -67,11 +71,29 @@ def getPages(data):
                     result = re.sub("ff.", "", result)
                     result = result.split("-")
                     if len(result) > 1:
-                        results_pages.append(result[1])
+                        pages.append(result[1])
                     else:
-                        results_pages.append(result[0])
-        el["pages"] = [results_pages]
-            
+                        pages.append(result[0])
+            # TEST
+            print(pages)
+            #
+            # use pages for url scraping
+            for page in pages:
+                URL = url + page
+                # TEST
+                print(URL)
+                # 
+                page = requests.get(URL)
+                soup = BeautifulSoup(page.content, "html.parser")
+                results = soup.find_all("a", class_="text")
+                for result in results:
+                    word_list.append(result.text)
+            print(word_list)
+            el["text"] = word_list
+            el["pages"] = pages_total
+
+getPages(data)
+print(data)
 
 
 #for page in results_pages:

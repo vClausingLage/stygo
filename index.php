@@ -58,8 +58,8 @@ $data = json_decode($data);
 <script>
 let data = '<?php echo json_encode($data); ?>'
 </script>
-<script src="js/three.js"></script>
-<script src="js/d3.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="js/vector.js"></script>
 <script src="js/renderer.js"></script>
 </body>
