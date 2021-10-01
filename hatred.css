@@ -28,7 +28,6 @@ h1, h2, h3, p {
 .legende {
   display: inline;
   background-color: white;
-  max-height: 4rem;
 }
 
 .colors {

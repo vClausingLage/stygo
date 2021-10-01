@@ -32,6 +32,11 @@ $data = json_decode($data);
 <div id='aesch'>
 </div>
 </div>
+<div class='title'>
+<h2>Sophocles</h2>
+<div id='soph'>
+</div>
+</div>
 <div class='legende'>
 <h2>Legend</h2>
 <ul class='colors'>

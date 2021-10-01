@@ -49,6 +49,10 @@ data = [
 {"author": "euripides", "urls": euripides_urls, "pages": [], "text": []}
 ]
 
+# JUST SOPHOCLES!
+data_sophocles = data[1]
+print(data_sophocles)
+
 # GET PAGES // LOOP AUTHORS! ! !
 def getPages(data):
     for el in data:
@@ -92,36 +96,55 @@ def getPages(data):
             el["text"] = word_list
             el["pages"] = pages_total
 
-getPages(data)
+def getPage(data):
+    pages_total = []
+    word_list = []
+    urls = data["urls"]
+    for url in urls:
+        # get pages for URL scraping
+        pages = []
+        URL_pages = url + str(1)
+        page = requests.get(URL_pages)
+        soup = BeautifulSoup(page.content, "html.parser")
+        result_pages = soup.find_all("div", class_="sidetoc mbot ind0")
+        for results in result_pages:
+            results = results.find_all("a")
+            for result in results:
+                result = result.text
+                result = re.sub("lines\s", "", result)
+                result = re.sub("line\s", "", result)
+                result = re.sub("ff.", "", result)
+                result = result.split("-")
+                if len(result) > 1:
+                    pages.append(result[1])
+                else:
+                    pages.append(result[0])
+        # TEST
+        print(pages)
+        #
+        # use pages for url scraping
+        for page in pages:
+            URL = url + page
+            # TEST
+            print(URL)
+            # 
+            page = requests.get(URL)
+            soup = BeautifulSoup(page.content, "html.parser")
+            results = soup.find_all("a", class_="text")
+            for result in results:
+                word_list.append(result.text)
+        print(word_list)
+        data["text"] = word_list
+        data["pages"] = pages_total
+
+# TEST
+# GET SOPHOCLES
+getPage(data_sophocles)
+print(data_sophocles)
+
+# getPages(data)
 print(data)
-
-
-#for page in results_pages:
-#                URL = url + page
-#                page = requests.get(URL)
-#                soup = BeautifulSoup(page.content, "html.parser")
-#                results = soup.find_all("a", class_="text")
-#                for result in results:
-#                    word_list.append(result.text)
-#            el["pages"] = results_pages
-#            el["text"] = word_list
-
-
-# REPLACE TEST URLS !!!
-
-#def getContent(page, url):
-#    word_list = []
-#    URL = url + page
-#    page = requests.get(URL)
-#    soup = BeautifulSoup(page.content, "html.parser")
-#    results = soup.find_all("a", class_="text")
-#    for result in results:
-#        word_list.append(result.text)
-#    return word_list
-
-#new_result = []
-#for page in pages:
-#    new_result.append(getContent(page, url))
     
-with open("data.txt", "w") as file:
-    file.write(str(data))
+with open("tragedistsData.json", "w") as file:
+    # file.write(str(data))
+    file.write(str(data_sophocles))

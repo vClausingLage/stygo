@@ -40,6 +40,7 @@ function setSVG(data, author) {
 }
 console.log(setSVG(data[0], 'aesch'))
 console.log(setSVG(data[1], 'eur'))
+console.log(setSVG(data[2], 'soph'))
 
 function showList() {
   var x = document.getElementById('list');
