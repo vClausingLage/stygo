@@ -1,28 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 
-html {
-  background-color: #EFE2BA;
+:root {
+  --White: #FFFFFF;
+  --First: #945436;  /* TITLES */
+  --Second: #fff5cc; /* BACKGROUND */ 
+  --Third: #FD3A0F; /* ANGER */ 
+  --Fourth: #008500; /* LOVE */
+  --ThirdTwo: #b835a2;
+  --FourthTwo: #2d9a9e;
 }
 
-.container {
-  margin-left: 1rem;
-  margin-right: 1rem
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--Second);
 }
 
 h1, h2, h3, p {
+  color: var(--First);
   text-align: center;
   font-family: 'Antic Slab';
+}
+
+@media (min-width: 5rem) {
+  .flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .flex {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-}
-
-.title {
-  text-align: center;
 }
 
 .legende {
@@ -36,4 +54,17 @@ h1, h2, h3, p {
   align-self: center;
   justify-content: center;
   background-color: white;
+}
+
+.anger {
+  color: var(--Third);
+}
+.love {
+  color: var(--Fourth)
+}
+.nasty {
+  color: var(--ThirdTwo);
+}
+.nice {
+  color: var(--FourthTwo)
 }

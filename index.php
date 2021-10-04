@@ -9,24 +9,23 @@
 </head>
 <body>
 
-<div class="container">
 
 <?php
+
+use function PHPSTORM_META\type;
+
 $data = file_get_contents('Data.json');
 $data = json_decode($data);
+$file = fopen("hatred.css", "r") or die("Unable to open file!");
+$colors = fread($file,filesize("hatred.css"));
+fclose($file);
+echo gettype($colors);
 ?>
-</div>
 
-<h1>How <span style='color: #FD3A0F'>angry</span> was Greek Tragedy?</h1>
-
-<h2>discover how often the three great tragedists use words of <span style='color: #FD3A0F'>anger</span> or words of <span style='color: #CBE432'>love</span><sup>[1]</sup></h2>
+<h1>How <span class="anger">angry</span> was Greek Tragedy?</h1>
+<h2>discover how often the three great tragedists use words of <span class="anger">anger</span> or words of <span class="love">love</span><sup>[1]</sup></h2>
 
 <div class='flex'>
-<div class='title'>
-<h2>Euripides</h2>
-<div id='eur'>
-</div>
-</div>
 <div class='title'>
 <h2>Aeschylus</h2>
 <div id='aesch'>
@@ -37,13 +36,18 @@ $data = json_decode($data);
 <div id='soph'>
 </div>
 </div>
+<div class='title'>
+<h2>Euripides</h2>
+<div id='eur'>
+</div>
+</div>
 <div class='legende'>
 <h2>Legend</h2>
 <ul class='colors'>
-  <li style='color: #FD3A0F; padding: 1rem'>ANGRY</li> 
-  <li style='color: #C21460; padding: 1rem'>NASTY</li> 
-  <li style='color: #CBE432; padding: 1rem'>AFFECTIONATE</li> 
-  <li style='color: #98CA32; padding: 1rem'>NICE</li>
+  <li class="anger">ANGRY</li> 
+  <li class="nasty">NASTY</li> 
+  <li class="love">AFFECTIONATE</li> 
+  <li class="nice">NICE</li>
 </ul>
 </div>
 </div>
@@ -62,10 +66,12 @@ $data = json_decode($data);
 
 <script>
 let data = '<?php echo json_encode($data); ?>'
+let colors = '<?php echo $colors; ?>'
+console.log(colors)
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 <script src="js/vector.js"></script>
-<script src="js/renderer.js"></script>
+<!-- <script src="js/renderer.js"></script> -->
 </body>
 </html>

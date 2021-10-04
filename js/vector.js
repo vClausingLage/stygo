@@ -43,10 +43,10 @@ console.log(setSVG(data[1], 'eur'))
 console.log(setSVG(data[2], 'soph'))
 
 function showList() {
-  var x = document.getElementById('list');
+  var x = document.getElementById('list')
   if (x.style.display === "none") {
-    x.style.display = "block";
+    x.style.display = "block"
   } else {
-    x.style.display = "none";
+    x.style.display = "none"
   }
 }
