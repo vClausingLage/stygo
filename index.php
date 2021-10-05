@@ -72,6 +72,10 @@ fclose($fh);
 </div>
 </p>
 
+
+<footer>
+  <p>&copy; vincent clausing-lage <?php echo date("Y"); ?></p>
+</footer>
 <script>
 let data = '<?php echo json_encode($data); ?>'
 let colors = '<?php echo $colors; ?>'
