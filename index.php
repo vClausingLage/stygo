@@ -72,6 +72,9 @@ fclose($fh);
 </div>
 </p>
 
+<!-- ADD WORDCLOUD -->
+
+
 
 <footer>
   <p>&copy; vincent clausing-lage <?php echo date("Y"); ?></p>
