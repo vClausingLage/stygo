@@ -1,0 +1,9 @@
+articles = 'τῷ τόδε τὰς τοῖς τοὺς τάδε τὴν ὁ τῆς τὸν τῶν τὸ τὰ τόδ'
+pronouns = 'σοὶ ἐγώ σὲ ἃ τι σὸν ὃς σὺ σοι σε με τίς ἐγὼ μοι νιν τί τις'
+particles = 'οὖν οὐδ μή οὐχ ἀλλὰ ἀλλ γε γάρ δέ θ γ ὦ μὲν δὲ δ γὰρ ἂν μὴ οὐ οὐκ δὴ πῶς'
+adverbs = 'εὖ ποτ νῦν ἤδη'
+prepositions = 'εἰς ἐν ὡς πρὸς ἐκ ἐπ ἐπὶ ἐς'
+subjunctions = 'εἰ ἢ καὶ τε τ'
+base_verbs = 'ἦν'
+noise = 'Χορός'
+noise_terms = articles + ' ' + pronouns + ' ' + particles + ' ' + articles + ' ' + prepositions + ' ' + subjunctions + ' ' + base_verbs + ' ' + noise

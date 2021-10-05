@@ -1,62 +1,86 @@
 import re
 import json
-import glob 
+from angry_strings import *
+from noise_terms import noise_terms
 
-txt_files = glob.glob('*.txt')
+# get text from JSON
+with open('tragedistsTexts.json', 'r', encoding='utf8') as file:
+    data = file.read()
+    data = json.loads(data)
+    if data[0]["author"] == "aeschylus":
+      aeschylus_text = data[0]["text"]
+      print("Aeschylus safe")
+    if data[1]["author"] == "sophocles":
+      sophocles_text = data[1]["text"]
+      print("Sophocles safe")
+    if data[2]["author"] == "euripides":
+      euripides_text = data[2]["text"]
+      print("Euripides safe")
 
-text_total = []
+# compose strings
+aeschylus_text = " ".join(aeschylus_text)
+sophocles_text = " ".join(sophocles_text)
+euripides_text = " ".join(euripides_text)
 
-for idx, el in enumerate(txt_files):
-    with open(el, 'r', encoding='utf8') as file:
-        text = file.read()
-        text = json.loads(text)
-        text = " ".join(text)
-        text_total.append(text)
+# remove non semantic tokens
+def removeNoise(query_string, noise_terms):
+ noise_terms = noise_terms.strip()
+ noise_terms = noise_terms.split()
+ for term in noise_terms:
+   query_string = re.sub(rf'\b{term}\b', '', query_string)
+ return query_string
 
-text_str = " ".join(text)
+aeschylus_text = removeNoise(aeschylus_text, noise_terms)
+sophocles_text = removeNoise(sophocles_text, noise_terms)
+euripides_text = removeNoise(euripides_text, noise_terms)
 
-def joinWords(text_str):
-  text_str = re.sub('-\s', '', text_str)
-  return text_str
+# join disjunct tokens
+def joinWords(query_string):
+ query_string = re.sub('-\s', '', query_string)
+ return query_string
 
-def removeNoise(query_string):
-  noise_terms = 'γάρ νιν δέ θ γ εἰ ἢ τί ὦ μὲν τὴν δὲ καὶ ὁ τῆς τὸν τῶν δ Χορός γὰρ τε ἐν τὸ ὡς τ πρὸς ἂν μὴ οὐ οὐκ ἀλλ ἐκ νῦν τὰ τις τόδ ἐπ ἐπὶ ἤδη δὴ ἐς πῶς'
-  noise_terms = noise_terms.strip()
-  noise_terms = noise_terms.split()
-  for term in noise_terms:
-    query_string = re.sub(rf'\b{term}\b', '', query_string)
-  return query_string
+aeschylus_text = joinWords(aeschylus_text)
+sophocles_text = joinWords(sophocles_text)
+euripides_text = joinWords(euripides_text)
 
-def word_count(str):
-    counts = dict()
-    words = str.split()
-    for word in words:
-        if word in counts:
-            counts[word] += 1
-        else:
-            counts[word] = 1
-    counts = sorted(counts.items(), key=lambda item: item[1])
-    return counts
+aeschylus_text_total = len(aeschylus_text)
+sophocles_text_total = len(sophocles_text)
+euripides_text_total = len(euripides_text)
 
-text_str = joinWords(text_str)
-text_str = removeNoise(text_str)
-print(word_count(text_str))
+# get total counts
+def word_count(query_string):
+   counts = dict()
+   words = query_string.split()
+   for word in words:
+       if word in counts:
+           counts[word] += 1
+       else:
+           counts[word] = 1
+   counts = sorted(counts.items(), key=lambda item: item[1])
+   return counts
 
-word_total = len(text)
-
+# find words of ANGER and LOVE
 def findAnger(text, query_str):
   result = []
   query_str = query_str.split()
   for query in query_str:
     result = result + re.findall(rf'\b{query}\w+', text)
   return result
-
-angry_str = 'ἐχθρ φόβ στυγ βίᾳ βία θαν κακ ὀργ δεῖμ μένο ἐπιθαν'
-nasty_str = 'καταισχύν αἶσχ ψόγ ἀνοσί ποιν πόν δακρύ ἀλγειν'
-affectionate_str = 'φίλ φιλ γάμ γαμηλί κοίτ σωτηρί'
-nice_str = 'ἡδον θέλκτορ θέλκτωρ οἰκεῖν βέλτερον προξένῳ φιλόξενον καλῶς ἁγνοῦ σέβας ὀρθοῖ εὖ ἀσφάλεια πανδίκως χρηστήρια'
-affection_regex = 'εὐ συν συμ ξυμ ξυν'
-reluctance_regex = 'δυσ'
+# Aeschylus
+aeschylus_anger = len(findAnger(aeschylus_text, angry_str))
+aeschylus_nasty = len(findAnger(aeschylus_text, nasty_str))
+aeschylus_affectionate = len(findAnger(aeschylus_text, affectionate_str))
+aeschylus_nice = len(findAnger(aeschylus_text, nice_str))
+# Sophocles
+sophocles_anger = len(findAnger(sophocles_text, angry_str))
+sophocles_nasty = len(findAnger(sophocles_text, nasty_str))
+sophocles_affectionate = len(findAnger(sophocles_text, affectionate_str))
+sophocles_nice = len(findAnger(sophocles_text, nice_str))
+# Euripides
+euripides_anger = len(findAnger(euripides_text, angry_str))
+euripides_nasty = len(findAnger(euripides_text, nasty_str))
+euripides_affectionate = len(findAnger(euripides_text, affectionate_str))
+euripides_nice = len(findAnger(euripides_text, nice_str))
 
 # PRINT TERMS
 #print('anger', findAnger(text_str, angry_str))
@@ -64,12 +88,16 @@ reluctance_regex = 'δυσ'
 #print('affectionate',findAnger(text_str, affectionate_str))
 #print('nice',findAnger(text_str, nice_str))
 
-anger = len(findAnger(text_str, angry_str))
-nasty = len(findAnger(text_str, nasty_str))
-affectionate = len(findAnger(text_str, affectionate_str))
-nice = len(findAnger(text_str, nice_str))
+#anger = len(findAnger(text_str, angry_str))
+#nasty = len(findAnger(text_str, nasty_str))
+#affectionate = len(findAnger(text_str, affectionate_str))
+#nice = len(findAnger(text_str, nice_str))
 
 with open('tragedistsData.json', 'w', encoding='utf8') as file:
-  data = {"author": 'author', "total": word_total, "angry": anger / word_total, "nasty": nasty / word_total , "affectionate": affectionate / word_total , "nice": nice / word_total}
-  output = json.dumps(data, ensure_ascii=False)
-  file.write(output)
+ data = [
+   {"author": "aeschylus", "total": aeschylus_text_total, "angry": aeschylus_anger / aeschylus_text_total, "nasty": aeschylus_nasty / aeschylus_text_total , "affectionate": aeschylus_affectionate / aeschylus_text_total , "nice": aeschylus_nice / aeschylus_text_total},
+   {"author": "sophocles", "total": sophocles_text_total, "angry": sophocles_anger / sophocles_text_total, "nasty": sophocles_nasty / sophocles_text_total , "affectionate": sophocles_affectionate / sophocles_text_total , "nice": sophocles_nice / sophocles_text_total},
+   {"author": "euripides", "total": euripides_text_total, "angry": euripides_anger / euripides_text_total, "nasty": euripides_nasty / euripides_text_total , "affectionate": euripides_affectionate / euripides_text_total , "nice": euripides_nice / euripides_text_total}
+ ]
+ output = json.dumps(data, ensure_ascii=False)
+ file.write(output)

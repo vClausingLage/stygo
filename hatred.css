@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 
 :root {
-  --White: #FFFFFF;
-  --First: #945436;  /* TITLES */
-  --Second: #fff5cc; /* BACKGROUND */ 
-  --Third: #FD3A0F; /* ANGER */ 
-  --Fourth: #008500; /* LOVE */
-  --ThirdTwo: #b835a2;
-  --FourthTwo: #2d9a9e;
+  --White: #FFFFFF;     /* DONT CHANGE ORDER */
+  --First: #945436;     /* TITLES */
+  --Second: #fff5cc;    /* BACKGROUND */ 
+  --Third: #FD3A0F;     /* ANGER */ 
+  --Fourth: #008500;    /* LOVE */
+  --ThirdTwo: #b835a2;  
+  --FourthTwo: #2d9a9e; 
 }
 
 body {
@@ -51,9 +51,11 @@ h1, h2, h3, p {
 .colors {
   list-style: none;
   display: flex;
-  align-self: center;
-  justify-content: center;
+  padding: 0;
   background-color: white;
+}
+.colors li {
+  padding: 1rem;
 }
 
 .anger {

@@ -2,12 +2,6 @@ import re
 import json
 
 noise_terms = 'τι τοῖς τοὺς τάδε ἀλλὰ σὸν ὃς σὺ σοι σε με γε εἰς τίς ἐγὼ γάρ μοι νιν δέ θ γ εἰ ἢ τί ὦ μὲν τὴν δὲ καὶ ὁ τῆς τὸν τῶν δ Χορός γὰρ τε ἐν τὸ ὡς τ πρὸς ἂν μὴ οὐ οὐκ ἀλλ ἐκ νῦν τὰ τις τόδ ἐπ ἐπὶ ἤδη δὴ ἐς πῶς'
-articles = 'τῷ τόδε τὰς'
-pronouns = 'σοὶ ἐγώ σὲ ἃ'
-particles = 'οὖν οὐδ μή οὐχ'
-adverbs = 'εὖ ποτ'
-base_verbs = 'ἦν'
-noise_terms = noise_terms + articles + pronouns + particles + articles + base_verbs
 
 with open('euripides.txt', 'r', encoding='utf8') as file:
     text = file.read()

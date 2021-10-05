@@ -1,3 +1,10 @@
+// CSS
+// get CSS
+colors = colors.trim()
+colors = colors.split(" ")
+colors = colors.slice(0,7)
+
+// DATA
 data = JSON.parse(data)
 
 function setSVG(data, author) {
@@ -7,16 +14,16 @@ function setSVG(data, author) {
   let nice = data.nice
 
   let startVector = [120,120]
-  let accelerator = 10000
+  let accelerator = 50000
 
-  let angryColor = '#FD3A0F'
-  let nastyColor = '#C21460'
-  let affectionateColor = '#CBE432'
-  let niceColor = '#98CA32'
+  let angryColor = colors[3]
+  let nastyColor = colors[5]
+  let affectionateColor = colors[4]
+  let niceColor = colors[6]
 
   let angryVector = [startVector[0],startVector[1],angry * accelerator,angryColor]
-  let nastyVector = [startVector[0] + (angry * accelerator + nasty * accelerator),startVector[1],nasty * accelerator,nastyColor]
-  let affectionateVector = [startVector[0] + (angry * accelerator + nasty * accelerator),startVector[1] + (nasty * accelerator + affectionate * accelerator),affectionate * accelerator,affectionateColor]
+  let nastyVector = [startVector[0] + (angry * accelerator + nasty * accelerator - (nasty * accelerator / 100 * 40)),startVector[1],nasty * accelerator,nastyColor]
+  let affectionateVector = [startVector[0] + (angry * accelerator + nasty * accelerator),startVector[1] + (nasty * accelerator + affectionate * accelerator - (affectionate * accelerator / 100 * 10)),affectionate * accelerator,affectionateColor]
   let niceVector = [startVector[0] + (angry * accelerator + nasty * accelerator) - (nice * accelerator + affectionate * accelerator),startVector[1] + (nasty * accelerator + affectionate * accelerator),nice * accelerator,niceColor]
 
   let vectors = [angryVector,nastyVector,affectionateVector,niceVector] // d[0] = x-axis d[1] = y-axis d[2] = radius
@@ -38,9 +45,10 @@ function setSVG(data, author) {
     .style('fill', function (d) { return d[3] })
   return data
 }
-console.log(setSVG(data[0], 'aesch'))
-console.log(setSVG(data[1], 'eur'))
-console.log(setSVG(data[2], 'soph'))
+
+setSVG(data[0], 'aesch')
+setSVG(data[1], 'eur')
+setSVG(data[2], 'soph')
 
 function showList() {
   var x = document.getElementById('list')
@@ -50,3 +58,9 @@ function showList() {
     x.style.display = "none"
   }
 }
+
+function greeetings() {
+  console.log('Hi there! 👋')
+}
+
+greeetings()

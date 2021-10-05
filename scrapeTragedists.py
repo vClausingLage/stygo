@@ -145,6 +145,6 @@ print(data_sophocles)
 # getPages(data)
 print(data)
     
-with open("tragedistsData.json", "w") as file:
+with open("tragedistsTexts.json", "w") as file:
     # file.write(str(data))
     file.write(str(data_sophocles))
