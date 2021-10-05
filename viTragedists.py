@@ -47,18 +47,14 @@ aeschylus_text_total = len(aeschylus_text)
 sophocles_text_total = len(sophocles_text)
 euripides_text_total = len(euripides_text)
 
-# get total counts
-def word_count(query_string):
-   counts = dict()
-   words = query_string.split()
-   for word in words:
-       if word in counts:
-           counts[word] += 1
-       else:
-           counts[word] = 1
-   counts = sorted(counts.items(), key=lambda item: item[1])
-   return counts
-
+# To Do 
+# REMOVE EXCEPTIONS
+# def removeExceptions(query_string):
+#   print('hello')
+# angry_str = removeExceptions(angry_str)
+# nasty_str = removeExceptions(nasty_str)
+# affectionate_str = removeExceptions(affectionate_str)
+# nice_str = removeExceptions(nice_str)
 # find words of ANGER and LOVE
 def findAnger(text, query_str):
   result = []
@@ -82,17 +78,29 @@ euripides_nasty = len(findAnger(euripides_text, nasty_str))
 euripides_affectionate = len(findAnger(euripides_text, affectionate_str))
 euripides_nice = len(findAnger(euripides_text, nice_str))
 
-# PRINT TERMS
-#print('anger', findAnger(text_str, angry_str))
-#print('nasty',findAnger(text_str, nasty_str))
-#print('affectionate',findAnger(text_str, affectionate_str))
-#print('nice',findAnger(text_str, nice_str))
+# get total counts
+# for TESTING TOKENS
+def word_count(query_string):
+   counts = dict()
+   words = query_string.split()
+   for word in words:
+       if word in counts:
+           counts[word] += 1
+       else:
+           counts[word] = 1
+   counts = sorted(counts.items(), key=lambda item: item[1])
+   return counts
+# PRINT TOTAL TOKENS
+aeschylus_tokens = word_count(aeschylus_text)
+print(aeschylus_tokens)
+# PRINT SPECIAL TOKENS
+print('anger', findAnger(aeschylus_text, angry_str))
+# print('nasty',findAnger(aeschylus_text, nasty_str))
+# print('affectionate',findAnger(aeschylus_text, affectionate_str))
+# print('nice',findAnger(aeschylus_text, nice_str))
 
-#anger = len(findAnger(text_str, angry_str))
-#nasty = len(findAnger(text_str, nasty_str))
-#affectionate = len(findAnger(text_str, affectionate_str))
-#nice = len(findAnger(text_str, nice_str))
 
+# WRITE TO FILE
 with open('tragedistsData.json', 'w', encoding='utf8') as file:
  data = [
    {"author": "aeschylus", "total": aeschylus_text_total, "angry": aeschylus_anger / aeschylus_text_total, "nasty": aeschylus_nasty / aeschylus_text_total , "affectionate": aeschylus_affectionate / aeschylus_text_total , "nice": aeschylus_nice / aeschylus_text_total},
