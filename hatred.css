@@ -6,8 +6,8 @@
   --Second: #fff5cc;    /* BACKGROUND */ 
   --Third: #FD3A0F;     /* ANGER */ 
   --Fourth: #008500;    /* LOVE */
-  --ThirdTwo: #b835a2;  
-  --FourthTwo: #2d9a9e; 
+  --ThirdTwo: #D67400;  
+  --FourthTwo: #0DBCBC; 
 }
 
 body {
@@ -44,13 +44,14 @@ h1, h2, h3, p {
 }
 
 .legende {
-  display: inline;
   background-color: white;
+  padding: .3rem;
 }
 
 .colors {
-  list-style: none;
   display: flex;
+  list-style: none;
+  justify-content: center;  
   padding: 0;
   background-color: white;
 }

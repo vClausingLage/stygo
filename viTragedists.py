@@ -9,13 +9,30 @@ with open('tragedistsTexts.json', 'r', encoding='utf8') as file:
     data = json.loads(data)
     if data[0]["author"] == "aeschylus":
       aeschylus_text = data[0]["text"]
-      print("Aeschylus safe")
+      print("Aeschylus loaded")
     if data[1]["author"] == "sophocles":
       sophocles_text = data[1]["text"]
-      print("Sophocles safe")
+      print("Sophocles loaded")
     if data[2]["author"] == "euripides":
       euripides_text = data[2]["text"]
-      print("Euripides safe")
+      print("Euripides loaded")
+
+# join disjunct tokens
+def joinWords(query_string):
+  for index,string in enumerate(query_string):
+    string.strip()
+    if string[-1] == "-":
+      string = list(string)
+      string.remove("-")
+      string = "".join(string)
+      query_string[index] = string
+      query_string[index] = query_string[index] + query_string[index + 1]
+      query_string.pop(index + 1)
+  return query_string
+
+aeschylus_text = joinWords(aeschylus_text)
+sophocles_text = joinWords(sophocles_text)
+euripides_text = joinWords(euripides_text)
 
 # compose strings
 aeschylus_text = " ".join(aeschylus_text)
@@ -24,28 +41,20 @@ euripides_text = " ".join(euripides_text)
 
 # remove non semantic tokens
 def removeNoise(query_string, noise_terms):
- noise_terms = noise_terms.strip()
- noise_terms = noise_terms.split()
- for term in noise_terms:
-   query_string = re.sub(rf'\b{term}\b', '', query_string)
- return query_string
+  noise_terms = noise_terms.strip()
+  noise_terms = noise_terms.split()
+  for term in noise_terms:
+    query_string = re.sub(rf'\b{term}\b', '', query_string)
+  query_string = re.sub('\s\s+', ' ', query_string)
+  return query_string
 
 aeschylus_text = removeNoise(aeschylus_text, noise_terms)
 sophocles_text = removeNoise(sophocles_text, noise_terms)
 euripides_text = removeNoise(euripides_text, noise_terms)
 
-# join disjunct tokens
-def joinWords(query_string):
- query_string = re.sub('-\s', '', query_string)
- return query_string
-
-aeschylus_text = joinWords(aeschylus_text)
-sophocles_text = joinWords(sophocles_text)
-euripides_text = joinWords(euripides_text)
-
-aeschylus_text_total = len(aeschylus_text)
-sophocles_text_total = len(sophocles_text)
-euripides_text_total = len(euripides_text)
+aeschylus_text_total = len(aeschylus_text.split())
+sophocles_text_total = len(sophocles_text.split())
+euripides_text_total = len(euripides_text.split())
 
 # To Do 
 # REMOVE EXCEPTIONS

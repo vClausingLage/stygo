@@ -31,19 +31,33 @@ fclose($fh);
 <div class='flex'>
 <div class='title'>
 <h2>Aeschylus</h2>
-<div id='aesch'>
-</div>
+<svg width="221" height="221" viewBox="0 0 221 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle id="aeschylus" cx="110.893" cy="110.591" r="110" fill="#B10303"/>
+<circle id="aeschylus" cx="168" cy="89" r="45" fill="#D67400"/>
+<circle id="aeschylus" cx="70" cy="70" r="45" fill="#4B8C0A"/>
+<circle id="aeschylus" cx="84" cy="160" r="45" fill="#0DBCBC"/>
+</svg>
 </div>
 <div class='title'>
 <h2>Sophocles</h2>
-<div id='soph'>
-</div>
+<svg width="221" height="221" viewBox="0 0 221 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle id="sophocles" cx="110.893" cy="110.591" r="110" fill="#B10303"/>
+<circle id="sophocles" cx="168" cy="89" r="45" fill="#D67400"/>
+<circle id="sophocles" cx="70" cy="70" r="45" fill="#4B8C0A"/>
+<circle id="sophocles" cx="84" cy="160" r="45" fill="#0DBCBC"/>
+</svg>
 </div>
 <div class='title'>
 <h2>Euripides</h2>
-<div id='eur'>
+<svg width="221" height="221" viewBox="0 0 221 221" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle id="euripides" cx="110.893" cy="110.591" r="110" fill="#B10303"/>
+<circle id="euripides" cx="168" cy="89" r="45" fill="#D67400"/>
+<circle id="euripides" cx="70" cy="70" r="45" fill="#4B8C0A"/>
+<circle id="euripides" cx="84" cy="160" r="45" fill="#0DBCBC"/>
+</svg>
 </div>
 </div>
+
 <div class='legende'>
 <h2>Legend</h2>
 <ul class='colors'>
@@ -52,7 +66,6 @@ fclose($fh);
   <li class="love">AFFECTIONATE</li>
   <li class="nice">NICE</li>
 </ul>
-</div>
 </div>
 
 <p>[1] Click here for a list of words that underlie the statistical analysis:
@@ -85,7 +98,7 @@ let colors = '<?php echo $colors; ?>'
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-<script src="js/vector.js"></script>
+<script src="js/vectors.js"></script>
 <!-- <script src="js/renderer.js"></script> -->
 </body>
 </html>

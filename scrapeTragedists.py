@@ -1,7 +1,6 @@
 import re
 import requests
 from bs4 import BeautifulSoup
-from requests.api import request
 
 aeschylus_urls = [
 "http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0003%3Acard%3D",
