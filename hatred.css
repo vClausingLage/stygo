@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 
 :root {
-  --White: #FFFFFF;     /* DONT CHANGE ORDER */
-  --First: #945436;     /* TITLES */
-  --Second: #fff5cc;    /* BACKGROUND */ 
-  --Third: #FD3A0F;     /* ANGER */ 
-  --Fourth: #008500;    /* LOVE */
+  --White: #FFFFFF;              /* DONT CHANGE ORDER */
+  --First: 148, 84, 54;            /* TITLES */
+  --Second: #fff5cc;             /* BACKGROUND */ 
+  --Third: #FD3A0F;              /* ANGER */ 
+  --Fourth: #008500;             /* LOVE */
   --ThirdTwo: #D67400;  
   --FourthTwo: #0DBCBC; 
 }
@@ -20,7 +20,7 @@ html {
 }
 
 h1, h2, h3, p {
-  color: var(--First);
+  color: rgb(var(--First));
   text-align: center;
   font-family: 'Antic Slab';
 }
@@ -57,6 +57,7 @@ h1, h2, h3, p {
 }
 .colors li {
   padding: 1rem;
+  font-size: large;
 }
 
 .anger {
@@ -70,4 +71,24 @@ h1, h2, h3, p {
 }
 .nice {
   color: var(--FourthTwo)
+}
+
+.button {
+  padding: .7rem;
+  color: white;
+  background-color: rgb(var(--First));
+  border: none;
+  border-radius: .3rem;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: rgba(var(--First), 0.8);
+}
+
+footer {
+  background-color: rgb(var(--First));
+  padding: .3rem;
+}
+footer p {
+  color: white;
 }

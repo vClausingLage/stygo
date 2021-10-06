@@ -1,6 +1,5 @@
 data = JSON.parse(data)
 
-let len = data.length
 let circleData = []
 let textData = []
 
@@ -11,12 +10,12 @@ function mapCircles(data) {
     })
 }
 function setCircles(circleData) {
-    for (i = 0; i < circleData.length; i++) {
+    for (let i = 0; i < circleData.length; i++) {
         let circles = document.querySelectorAll(`#${textData[i][0]}`)
-        circles[0].setAttribute('r', circleData[i][0] * 5000)
-        circles[1].setAttribute('r', circleData[i][1] * 5000)
-        circles[2].setAttribute('r', circleData[i][2] * 5000)
-        circles[3].setAttribute('r', circleData[i][3] * 5000)
+        circles[0].setAttribute('r', String(circleData[i][0] * 5000))
+        circles[1].setAttribute('r', String(circleData[i][1] * 5000))
+        circles[2].setAttribute('r', String(circleData[i][2] * 5000))
+        circles[3].setAttribute('r', String(circleData[i][3] * 5000))
     }
 }
 

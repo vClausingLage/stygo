@@ -99,11 +99,14 @@ def word_count(query_string):
            counts[word] = 1
    counts = sorted(counts.items(), key=lambda item: item[1])
    return counts
-# PRINT TOTAL TOKENS // FOR WORDCLOUD
-aeschylus_tokens = word_count(aeschylus_text)
-sophocles_tokens = word_count(sophocles_text)
-euripides_tokens = word_count(euripides_text)
-# PRINT SPECIAL TOKENS
+# TOTAL TOKENS // FOR WORDCLOUD
+aeschylus_tokens = findAnger(aeschylus_text, angry_str) + findAnger(aeschylus_text, nasty_str)
+aeschylus_tokens = word_count(" ".join(aeschylus_tokens))
+sophocles_tokens = findAnger(sophocles_text, angry_str) + findAnger(sophocles_text, nasty_str)
+sophocles_tokens = word_count(" ".join(sophocles_tokens))
+euripides_tokens = findAnger(euripides_text, angry_str) + findAnger(euripides_text, nasty_str)
+euripides_tokens = word_count(" ".join(euripides_tokens))
+# PRINT SPECIAL TOKENS FOR TESTING
 # print('anger', findAnger(aeschylus_text, angry_str))
 # print('nasty',findAnger(aeschylus_text, nasty_str))
 # print('affectionate',findAnger(aeschylus_text, affectionate_str))
@@ -112,9 +115,9 @@ euripides_tokens = word_count(euripides_text)
 # WRITE TO FILE
 with open('tragedistsData.json', 'w', encoding='utf8') as file:
  data = [
-   {"author": "aeschylus", "total": aeschylus_text_total, "angry": aeschylus_anger / aeschylus_text_total, "nasty": aeschylus_nasty / aeschylus_text_total , "affectionate": aeschylus_affectionate / aeschylus_text_total , "nice": aeschylus_nice / aeschylus_text_total , "tokens": aeschylus_tokens},
-   {"author": "sophocles", "total": sophocles_text_total, "angry": sophocles_anger / sophocles_text_total, "nasty": sophocles_nasty / sophocles_text_total , "affectionate": sophocles_affectionate / sophocles_text_total , "nice": sophocles_nice / sophocles_text_total , "tokens": sophocles_tokens},
-   {"author": "euripides", "total": euripides_text_total, "angry": euripides_anger / euripides_text_total, "nasty": euripides_nasty / euripides_text_total , "affectionate": euripides_affectionate / euripides_text_total , "nice": euripides_nice / euripides_text_total , "tokens": euripides_tokens}
+   {"author": "aeschylus", "total": aeschylus_text_total, "angry": aeschylus_anger / aeschylus_text_total, "nasty": aeschylus_nasty / aeschylus_text_total , "affectionate": aeschylus_affectionate / aeschylus_text_total , "nice": aeschylus_nice / aeschylus_text_total , "tokens": aeschylus_tokens[-100:]},
+   {"author": "sophocles", "total": sophocles_text_total, "angry": sophocles_anger / sophocles_text_total, "nasty": sophocles_nasty / sophocles_text_total , "affectionate": sophocles_affectionate / sophocles_text_total , "nice": sophocles_nice / sophocles_text_total , "tokens": sophocles_tokens[-100:]},
+   {"author": "euripides", "total": euripides_text_total, "angry": euripides_anger / euripides_text_total, "nasty": euripides_nasty / euripides_text_total , "affectionate": euripides_affectionate / euripides_text_total , "nice": euripides_nice / euripides_text_total , "tokens": euripides_tokens[-100:]}
  ]
- output = json.dumps(data, ensure_ascii=False)
+ output = json.dumps(data, ensure_ascii=False, indent=2)
  file.write(output)
