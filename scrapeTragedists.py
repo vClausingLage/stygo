@@ -48,11 +48,7 @@ data = [
 {"author": "euripides", "urls": euripides_urls, "pages": [], "text": []}
 ]
 
-# JUST SOPHOCLES!
-data_sophocles = data[1]
-print(data_sophocles)
-
-# GET PAGES // LOOP AUTHORS! ! !
+# GET PAGES
 def getPages(data):
     for el in data:
         pages_total = []
@@ -136,14 +132,8 @@ def getPage(data):
         data["text"] = word_list
         data["pages"] = pages_total
 
-# TEST
-# GET SOPHOCLES
-getPage(data_sophocles)
-print(data_sophocles)
-
 # getPages(data)
-print(data)
+getPage(data)
     
 with open("tragedistsTexts.json", "w") as file:
-    # file.write(str(data))
-    file.write(str(data_sophocles))
+    file.write(str(data))
