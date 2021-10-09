@@ -1,7 +1,7 @@
-from tokenizer import dediacritcializer
 import json
+from tokenizer import dediacritcializer
 
-with open('tokenizer/morphologyEndingsGreek.json', 'r', encoding='utf8') as file:
+with open('tokenizer/endingsGreek.json', 'r', encoding='utf8') as file:
     endings = file.read()
     endings = json.loads(endings)
 
@@ -15,8 +15,8 @@ def generateDecl(stems_decl):
   oDecl = []
   if (len(stems_decl["oDecl"])) > 0:
     oDecl = stems_decl["oDecl"].split()
+  tokens = []
   for token in oDecl:
-    tokens = []
     size = len(token)
     token = token[:size-2]
     for ending in endingsO:
@@ -24,7 +24,7 @@ def generateDecl(stems_decl):
       # REMOVE DIACRITICS
       input_token = dediacritcializer.dediacriticalizer(input_token)
       tokens.append(input_token)
-    stems_decl_list[1] = tokens
+  stems_decl_list[1] = tokens
   # aDecl
   oDecl = []
   if (len(stems_decl["aDecl"])) > 0:

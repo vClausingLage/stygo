@@ -1,7 +1,7 @@
 import re
 import json
-from angry_strings import *
-from noise_terms import noise_terms
+from angry_strings import * ## ERSETZEN!
+from tokenizer import noise_terms
 
 # get text from JSON
 with open('tragedistsTexts.json', 'r', encoding='utf8') as file:
