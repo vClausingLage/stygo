@@ -10,7 +10,6 @@ with open("tokenizer/queryTokens.json", "r") as f:
   query_tokens = json.loads(query_tokens)
 
 tokens = []
-
 for el in query_tokens:   # prepare a STRING for QUERY_TOKENS
   for x in el:
     tokens.append(x)
@@ -41,12 +40,13 @@ def removeNoise(query_string, noise_terms):   # remove noise
   return query_string
 
 input = removeNoise(input, noise_terms.noise_terms)
+print(input)
 
 def findToken(text, query_str):   # find tokens
   result = []
   query_str = query_str.split()
   for query in query_str:
-    result = result + re.findall(rf'\b{query}\w+', text)
+    result = result + re.findall(rf'\b{query}\b', text)
   return result
 
 input_results = findToken(input, tokens)
