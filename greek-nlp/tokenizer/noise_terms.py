@@ -1,3 +1,6 @@
+import re
+from tokenizer import dediacritcializer
+
 articles = 'ὅδ τάνδε τᾶσδ τήνδε τῷ τόδε τὰς τοῖς τοὺς τάδε τὴν ὁ τῆς τὸν τῶν τὸ τὰ τόδ τῶνδε τῶνδ τῆσδε τοῦ ἡ τοῦδ τόνδ τὰν τῆσδ τῇδε τάσδε τῷδ τοῖσδε τόνδε τήνδ ἅδε τόν τάδ τοῦδε ὧν ἐμῶν'
 pronouns = 'τοὐμὸν ὃν οὐδέν τούτων ταῦτα ταῦτ τοῦτ ὑμῖν τινί μου σοὶ ἐγώ σὲ ἃ τι σὸν ὃς σὺ σοι σε με τίς ἐγὼ μοι νιν τί τις τοι ἐμοῦ σέθεν ὅστις οἱ τιν ἡμῖν ἐμοῖς ἐμοὶ ἐμοί σύ οὔτις ἐμῆς οἷς σῆς κἀμὲ τοιοῖσδε σόν οὔτιν τοῦτο οὔτοι αὐτὸς'
 particles = 'ἆρ οὐχὶ ὥς δῆτα οὔ ἒ μηδ οὐδὲν μὴν οὖν οὐδ μή οὐχ ἀλλὰ ἀλλ γε γάρ δέ ὦ μὲν δὲ δ γὰρ ἂν μὴ οὐ οὐκ δὴ πῶς ἦ οὐδὲ οὔτε μέν μήτ ἄν ὅμως δή ἆρα ἠδὲ οὔτ'
@@ -8,3 +11,12 @@ base_verbs = 'ἦν ὢν'
 noise_and_names = 'Τειρεσίας Τεῦκρος Κῆρυξ Ἄρης Δαρεῖος Ἑρμῆς Δαναός Χορός Κασάνδρα Κλυταιμήστρα Ἠλέκτρα Προμηθεύς Ὀρέστης Ἀπόλλων Ἀντιγόνη Κασάνδρα Ἄτοσσα Βασιλεύς Ἐτεοκλής Ἰσμήνη Ἄγγελος Ξέρξης'
 singles = 'μ σ θ γ τ'
 noise_terms = articles + ' ' + pronouns + ' ' + particles + ' ' + adverbs + ' ' + articles + ' ' + prepositions + ' ' + subjunctions + ' ' + base_verbs + ' ' + noise_and_names + ' ' + singles
+
+def removeNoise(query_string, noise_terms):
+  noise_terms = dediacritcializer.dediacriticalizer(noise_terms)
+  noise_terms = noise_terms.strip()
+  noise_terms = noise_terms.split()
+  for term in noise_terms:
+    query_string = re.sub(rf'\b{term}\b', '', query_string)
+  query_string = re.sub('\s\s+', ' ', query_string)
+  return query_string
