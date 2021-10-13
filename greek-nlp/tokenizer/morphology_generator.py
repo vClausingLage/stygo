@@ -1,3 +1,6 @@
+# To Do
+# remove diacritics double ?
+
 import json
 from tokenizer import dediacritcializer
 
@@ -17,13 +20,15 @@ def generateDecl(stems_decl):
     oDecl = stems_decl["oDecl"].split()
   tokens = []
   for token in oDecl:
+    token_list = []
     size = len(token)
     token = token[:size-2]
     for ending in endingsO:
       input_token = token + ending
       # REMOVE DIACRITICS
       input_token = dediacritcializer.dediacriticalizer(input_token)
-      tokens.append(input_token)
+      token_list.append(input_token)
+    tokens.append(token_list)
   stems_decl_list[1] = tokens
   # aDecl
   oDecl = []
@@ -37,7 +42,7 @@ def generateDecl(stems_decl):
     token = dediacritcializer.dediacriticalizer(token)
     for ending in endingsA:
       input_token = token + ending
-      # REMOVE DIACRITICS
+      # # REMOVE DIACRITICS
       input_token = dediacritcializer.dediacriticalizer(input_token)
       tokens.append(input_token)
     stems_decl_list[0] = tokens
