@@ -24,7 +24,7 @@ def generateDecl(stems_decl):
           # REMOVE DIACRITICS
           input_token = dediacritcializer.dediacriticalizer(input_token)
           token_list.append(input_token)
-        stems_decl[el]["oDecl"].append(token_list)
+        stems_decl[el]["oDecl"].append(" ".join(token_list))
       stems_decl[el]["oDecl"].pop(0)
     # A DECL
     if len(stems_decl[el]["aDecl"]) > 0:
@@ -38,13 +38,14 @@ def generateDecl(stems_decl):
           # REMOVE DIACRITICS
           input_token = dediacritcializer.dediacriticalizer(input_token)
           token_list.append(input_token)
-        stems_decl[el]["aDecl"].append(token_list)
+        stems_decl[el]["aDecl"].append(" ".join(token_list))
       stems_decl[el]["aDecl"].pop(0)
     # K DECL
     if len(stems_decl[el]["kDecl"]) > 0:
       kDecl = stems_decl[el]["kDecl"][0]
       for token in kDecl:
         # TO DO IF ELSES FOR ENDINGS!!!
+        # TO DO search for "τσ" -> "σ"
         if token[-1] == "α":
           token_list = []
           for ending in endingsK:
@@ -52,6 +53,6 @@ def generateDecl(stems_decl):
             # REMOVE DIACRITICS
             input_token = dediacritcializer.dediacriticalizer(input_token)
             token_list.append(input_token)
-          stems_decl[el]["kDecl"].append(token_list)
+          stems_decl[el]["kDecl"].append(" ".join(token_list))
       stems_decl[el]["kDecl"].pop(0)
   return stems_decl

@@ -1,3 +1,10 @@
+# Tests
+
+list1 = [1,2,3]
+list2 = [5,6,7]
+res = list1 + list2
+print(res)
+
 ## strings
 str1 = "οσιοι"
 str2 = "κακοι"
