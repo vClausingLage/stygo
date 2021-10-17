@@ -1,5 +1,4 @@
 import json
-from os import O_DIRECT
 from tokenizer import dediacritcializer
 
 with open('tokenizer/endingsGreek.json', 'r', encoding='utf8') as file:
