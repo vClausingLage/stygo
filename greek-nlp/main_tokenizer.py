@@ -12,10 +12,10 @@ from tokenizer import noise_terms
 
 # generate TOKENS (lemma) for QUERY
 query_tokens = morphology_generator.generateDecl(query_tokens_generator.stems_decl_full)
-print("query tokens genreated")
+print("1. query tokens genreated")
 # PREPARE text (remove DIACRITICS)
 text = text_preparer.text_preparer("tokenizer/input.txt")
-print("text prepared")
+print("2. text prepared")
 # PREAPARE text (remove NOISE)
 # text = noise_terms.removeNoise(text, noise_terms.noise_terms)
 # print("noise removed from text")
@@ -33,14 +33,13 @@ query_list.append(nice_list)
 
 # QUERY text with tokens
 def findToken(text, query_list):
-  print("begin query")
   result = []
   count = 0
   for query in query_list:
     query = query.split()
     for x in query:
       count += len(re.findall(rf'\b{x}\b', text))
-      result.append({"query": x[0], "count": count})
+    result.append({"query": query[0], "count": count})
 
   # # for query in query_list:
   # #   if len(query) > 0:
@@ -50,15 +49,13 @@ def findToken(text, query_list):
   #   count += len(re.findall(rf'\b{x}\b', text))
   #   result.append({"query": x[0], "count": count})
   return result
-result_angry = findToken(text, query_list[0])
-result_nasty = findToken(text, query_list[1])
-# result_affectionate = findToken(text, query_list[2])
-# result_nice = findToken(text, query_list[3])
-print(result_angry)
-print(result_nasty)
-# print(result_affectionate)
-# print(result_nice)
+print("3. begin query")
+query_tokens["angry"]["result"] = findToken(text, query_list[0])
+query_tokens["nasty"]["result"] = findToken(text, query_list[1])
+query_tokens["affectionate"]["result"] = findToken(text, query_list[2])
+query_tokens["nice"]["result"] = findToken(text, query_list[3])
 
-# with open("tokenizer/queryTokens.json", "w", encoding='utf8') as f:       # write RESULTS to FILE (necessary?)
-#   query_tokens = json.dumps(query_tokens, ensure_ascii=False, indent=2)
-#   f.write(str(query_tokens))
+print("4. writing file")
+with open("tokenizer/queryTokens.json", "w", encoding='utf8') as f:       # write RESULTS to FILE (necessary?)
+  query_tokens = json.dumps(query_tokens, ensure_ascii=False, indent=2)
+  f.write(str(query_tokens))

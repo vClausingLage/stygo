@@ -1,10 +1,10 @@
 # STEMS_DECL
 # RULE : DICT_semantics | {"oDecl": [], "aDecl": []}
 stems_decl_full = {
-  "angry": {"aDecl": [], "oDecl": [], "kDecl": [], "result": 0}, 
-  "nasty": {"aDecl": [], "oDecl": [], "kDecl": [], "result": 0}, 
-  "affectionate": {"aDecl": [], "oDecl": [], "kDecl": [], "result": 0}, 
-  "nice": {"aDecl": [], "oDecl": [], "kDecl": [], "result": 0}
+  "angry": {"aDecl": [], "oDecl": [], "kDecl": [], "result": []}, 
+  "nasty": {"aDecl": [], "oDecl": [], "kDecl": [], "result": []}, 
+  "affectionate": {"aDecl": [], "oDecl": [], "kDecl": [], "result": []}, 
+  "nice": {"aDecl": [], "oDecl": [], "kDecl": [], "result": []}
 }
 
 # add stems
