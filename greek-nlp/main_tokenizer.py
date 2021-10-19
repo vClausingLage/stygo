@@ -31,11 +31,14 @@ nice_list = query_tokens["nice"]["aDecl"] + query_tokens["nice"]["oDecl"] + quer
 # QUERY text with tokens
 def findToken(text, query_list):
   result = []
-  count = 0
   for query in query_list:
     query = query.split()
+    count = 0
+    print(query)
     for x in query:
       count += len(re.findall(rf'\b{x}\b', text))
+      print(x)
+      print(count)
     result.append({"query": query[0], "count": count})
   return result
 print("3. begin query")
