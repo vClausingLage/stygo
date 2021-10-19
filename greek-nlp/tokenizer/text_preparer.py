@@ -19,11 +19,14 @@ def text_preparer(text):
     with open(text, "r") as file:
         text = file.read()
         if text[0] == "[" or text[0] == "{":
-            text = json.loads(text)
-            text = joinWords(text)
+          text = json.loads(text)
+          text = joinWords(text)
         else:
           text = text.split()
           text = joinWords(text)
+        # remove white space
+        
+        # To Do
         # remove NUMBERS
         text = re.sub("\d", "", text)
         # remove PUNCTUATION

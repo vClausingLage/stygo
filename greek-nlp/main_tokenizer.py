@@ -16,20 +16,17 @@ print("1. query tokens genreated")
 # PREPARE text (remove DIACRITICS)
 text = text_preparer.text_preparer("tokenizer/input.txt")
 print("2. text prepared")
+with open("normalizedText.txt", "w") as f:
+  f.write(text)
 # PREAPARE text (remove NOISE)
 # text = noise_terms.removeNoise(text, noise_terms.noise_terms)
 # print("noise removed from text")
 
-# prepare QUERY LIST
-query_list = []
+# prepare QUERY LISTS
 angry_list = query_tokens["angry"]["aDecl"] + query_tokens["angry"]["oDecl"] + query_tokens["angry"]["kDecl"]
 nasty_list = query_tokens["nasty"]["aDecl"] + query_tokens["nasty"]["oDecl"] + query_tokens["nasty"]["kDecl"]
 affectionate_list = query_tokens["affectionate"]["aDecl"] + query_tokens["affectionate"]["oDecl"] + query_tokens["affectionate"]["kDecl"]
 nice_list = query_tokens["nice"]["aDecl"] + query_tokens["nice"]["oDecl"] + query_tokens["nice"]["kDecl"]
-query_list.append(angry_list)
-query_list.append(nasty_list)
-query_list.append(affectionate_list)
-query_list.append(nice_list)
 
 # QUERY text with tokens
 def findToken(text, query_list):
@@ -40,20 +37,12 @@ def findToken(text, query_list):
     for x in query:
       count += len(re.findall(rf'\b{x}\b', text))
     result.append({"query": query[0], "count": count})
-
-  # # for query in query_list:
-  # #   if len(query) > 0:
-  # #     for el in query:
-  # #       count = 0
-  # for x in query_list:
-  #   count += len(re.findall(rf'\b{x}\b', text))
-  #   result.append({"query": x[0], "count": count})
   return result
 print("3. begin query")
-query_tokens["angry"]["result"] = findToken(text, query_list[0])
-query_tokens["nasty"]["result"] = findToken(text, query_list[1])
-query_tokens["affectionate"]["result"] = findToken(text, query_list[2])
-query_tokens["nice"]["result"] = findToken(text, query_list[3])
+query_tokens["angry"]["result"] = findToken(text, angry_list)
+query_tokens["nasty"]["result"] = findToken(text, nasty_list)
+query_tokens["affectionate"]["result"] = findToken(text, affectionate_list)
+query_tokens["nice"]["result"] = findToken(text, nice_list)
 
 print("4. writing file")
 with open("tokenizer/queryTokens.json", "w", encoding='utf8') as f:       # write RESULTS to FILE (necessary?)
