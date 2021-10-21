@@ -7,7 +7,6 @@ from tokenizer import text_preparer
 from tokenizer import noise_terms
 
 # To Do
-# getrennte Wörter verbinden!
 # ENDUNGEN IN JSON !!! ergänzen
 
 # generate TOKENS (lemma) for QUERY
@@ -34,11 +33,8 @@ def findToken(text, query_list):
   for query in query_list:
     query = query.split()
     count = 0
-    print(query)
     for x in query:
       count += len(re.findall(rf'\b{x}\b', text))
-      print(x)
-      print(count)
     result.append({"query": query[0], "count": count})
   return result
 print("3. begin query")

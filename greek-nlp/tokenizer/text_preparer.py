@@ -25,8 +25,7 @@ def text_preparer(text):
           text = text.split()
           text = joinWords(text)
         # remove white space
-        
-        # To Do
+        text = re.sub(" {2,}", " ", text)
         # remove NUMBERS
         text = re.sub("\d", "", text)
         # remove PUNCTUATION
