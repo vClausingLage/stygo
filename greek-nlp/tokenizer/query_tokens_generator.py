@@ -8,6 +8,7 @@ stems_decl_full = {
 }
 
 # add stems
+# # ONLY substantives and adjectives!
 # RULE : semantic | declination || conjugation
 angry_o = "φόβος πόλεμος"
 angry_a = "βλάβη ὀργή αἰσχύνη"
@@ -17,7 +18,7 @@ angry_adj = "στυγερός ἐχθρός"
 nasty_o = "ψόγος"
 nasty_a = ""
 nasty_k = "δεῖμα"
-nasty_adj = ""
+nasty_adj = "κακός"
 
 affectionate_o = ""
 affectionate_a = ""
@@ -26,8 +27,8 @@ affectionate_adj = ""
 
 nice_o = ""
 nice_a = ""
-nice_k = ""
-nice_adj = ""
+nice_k = "χαρις" # σεβας
+nice_adj = "καλός"
 
 angry_o = angry_o.split()
 angry_a = angry_a.split()

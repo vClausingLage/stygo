@@ -8,10 +8,9 @@ with open('tokenizer/endingsGreek.json', 'r', encoding='utf8') as file:
 endingsO = endings["oDecl"]
 endingsA = endings["aDecl"]
 endingsK = endings["kDecl"]
-# pop out empty string
 endingsAdj = endings["oDecl"] + endings["aDecl"] + endings["kDecl"]
+#pop out empty string (kons Decl)
 endingsAdj = [x for x in endingsAdj if x]
-print(endingsAdj)
 
 def generateDecl(stems_decl):
   for el in stems_decl:
@@ -33,6 +32,7 @@ def generateDecl(stems_decl):
     if len(stems_decl[el]["aDecl"]) > 0:
       aDecl = stems_decl[el]["aDecl"][0]
       for token in aDecl:
+        # To Do : if statement for α and η
         token_list = []
         size = len(token)
         token = token[:size-1]
@@ -59,6 +59,8 @@ def generateDecl(stems_decl):
             # input_token = dediacritcializer.dediacriticalizer(input_token)
             token_list.append(input_token)
           stems_decl[el]["kDecl"].append(" ".join(token_list))
+        else:
+          print("unknown K DECL morphology")
       stems_decl[el]["kDecl"].pop(0)
     # Adjectives 
     if len(stems_decl[el]["Adj"]) > 0:
