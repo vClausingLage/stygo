@@ -1,6 +1,7 @@
 from tokenizer import dediacritcializer as de
 
 endingsK = ["ι", "ος", "α", "ες", "ων", "σι", "σιν", "ας"]
+endingsKn = ["ι", "ος", "α", "ων", "σι", "σιν", "ας"]
 endingsOm = ["ου", "ω", "ον", "οι", "ων", "οις", "ους"]
 endingsOn = ["ου", "ω", "ον", "α", "ων", "οις"]
 endingsAa = ["αν", "αι", "ων", "αις", "ας"]
@@ -29,9 +30,16 @@ def fillLemmata(lemmata): # lemmata : list
     elif gen[-2:] == "ος":
       tokens = [lemma[0]]
       tokens.append(nom)
-      for ending in endingsK:
-        tokens.append(stem + ending)
-      lemmata_list.append(tokens)
+      if lemma[2] == "n":
+        for ending in endingsKn:
+          tokens.append(stem + ending)
+        lemmata_list.append(tokens)
+      elif lemma[2] == "m" or lemma[2] == "f":
+        for ending in endingsK:
+          tokens.append(stem + ending)
+        lemmata_list.append(tokens)
+      else:
+        print("missing genus declaration")
     elif nom[-1] == "α":
       tokens = [lemma[0]]
       tokens.append(nom)

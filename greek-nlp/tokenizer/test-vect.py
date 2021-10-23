@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Tests
 
 list1 = [1,2,3]
@@ -9,9 +12,9 @@ print(res)
 str1 = "οσιοι"
 str2 = "κακοι"
 ## Hamming distance
-"""
-hamming distance is only applicable to strings with EQUAL LENGTH
-"""
+# """
+# hamming distance is only applicable to strings with EQUAL LENGTH
+# """
 def hamming_distance(string1, string2):
 	dist_counter = 0
 	for n in range(len(string1)):
@@ -21,9 +24,9 @@ def hamming_distance(string1, string2):
 # d_str_ham = hamming_distance(str1,str2)
 # print(d_str_ham)
 ## Levenstein distance
-"""
-levenstein distance allows insertion, deletion, substitution
-"""
+# """
+# levenstein distance allows insertion, deletion, substitution
+# """
 from difflib import ndiff
 def levenshtein_distance(str1, str2, ):
     counter = {"+": 0, "-": 0}
