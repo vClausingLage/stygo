@@ -1,7 +1,7 @@
 import json
 import re
-from tokenizer import morphology_generator
-from tokenizer import query_tokens_generator
+# from tokenizer import morphology_generator
+# from tokenizer import query_tokens_generator
 from tokenizer import text_preparer
 from tokenizer import noise_terms
 from tokenizer import lemma_generator as lem
@@ -17,15 +17,15 @@ print("... and noise removed from text")
 # text length
 text_length = len(text.split())
 
-angry_subst = [("φόβος", "φόβου"), ("κότος", "κότου"), ("δεῖμα", "δείματος", "n"), ("πόλεμος", "πολέμου"), ("βλάβη", "βλάβης"), ("ὀργή", "ὀργῆς"), ("αἰσχύνη", "αἰσχύνης"), ("βία", "βίας")] ; angry_adj = [("στυγερός", "στυγεροῦ"), ("ἐχθρός", "ἐχθροῦ")]; angry_add = []
-nasty_subst = [("ψόγος", "ψόγου"), ("πονος", "πόνου")]; nasty_adj = [("κακός", "κακοῦ"), ("ατιμος", "ατιμου"), ("ταλαινα", "ταλαινας")]; nasty_add = ["κακά"]
-affectionate_subst = [("φίλος", "φίλου"), ("γάμος", "γάμου"), ("σωτήρ", "σωτήρος", "m")]; affectionate_adj = []; affectionate_add = []
-nice_subst = [("χαρις", "χάριτος", "f"), ("σεβας", "σέβατος", "n"), ("ἄκος", "ἄκεος", "n")]; nice_adj = [("καλός", "καλοῦ")]; nice_add = []
+angry_subst = [("φόβος", "φόβου"), ("κότος", "κότου"), ("δεῖμα", "δείματος", "n"), ("πόλεμος", "πολέμου"), ("βλάβη", "βλάβης"), ("ὀργή", "ὀργῆς"), ("αἰσχύνη", "αἰσχύνης"), ("βία", "βίας")] ; angry_adj = [("στυγερός", "στυγεροῦ", "adj"), ("ἐχθρός", "ἐχθροῦ", "adj")]
+nasty_subst = [("ψόγος", "ψόγου"), ("πονος", "πόνου")]; nasty_adj = [("κακός", "κακοῦ", "adj"), ("ατιμος", "ατιμου", "adj"), ("ταλαινα", "ταλαινας", "adj")]
+affectionate_subst = [("φίλος", "φίλου"), ("γάμος", "γάμου"), ("σωτήρ", "σωτήρος", "m")]; affectionate_adj = []
+nice_subst = [("χαρις", "χάριτος", "f"), ("σεβας", "σέβατος", "n"), ("ἄκος", "ἄκεος", "n")]; nice_adj = [("καλός", "καλοῦ", "adj"), ("ἀγαθος", "ἀγαθου", "adj")]
 
-angry = lem.fillLemmata(angry_subst) + lem.fillLemmata(angry_adj) + angry_add
-nasty = lem.fillLemmata(nasty_subst) + lem.fillLemmata(nasty_adj) + nasty_add
-affectionate = lem.fillLemmata(affectionate_subst) + lem.fillLemmata(affectionate_adj) + affectionate_add
-nice = lem.fillLemmata(nice_subst) + lem.fillLemmata(nice_adj) + nice_add
+angry = lem.fillLemmata(angry_subst) + lem.fillLemmata(angry_adj)
+nasty = lem.fillLemmata(nasty_subst) + lem.fillLemmata(nasty_adj)
+affectionate = lem.fillLemmata(affectionate_subst) + lem.fillLemmata(affectionate_adj)
+nice = lem.fillLemmata(nice_subst) + lem.fillLemmata(nice_adj)
 
 lemmata = {"angry": angry, "nasty": nasty, "affectionate": affectionate, "nice": nice}
 
@@ -33,7 +33,7 @@ def lemmatizeText(text, lemmata):
   all_lemmata = lemmata["angry"] + lemmata["nasty"] + lemmata["affectionate"] + lemmata["nice"]
   for element in all_lemmata:
     for lemma in element:
-      # print(lemma)
+      # !!! extra adv !!!
       text = re.sub(rf"\b{lemma}\b", element[1], text) # text.replace(lemma, element[1])
   return text
 print("2. lemmatizing text")

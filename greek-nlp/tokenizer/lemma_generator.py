@@ -1,11 +1,12 @@
 from tokenizer import dediacritcializer as de
 
-endingsK = ["ι", "ος", "α", "ες", "ων", "σι", "σιν", "ας"]
-endingsKn = ["ι", "ος", "α", "ων", "σι", "σιν", "ας"]
 endingsOm = ["ου", "ω", "ον", "οι", "ων", "οις", "ους"]
 endingsOn = ["ου", "ω", "ον", "α", "ων", "οις"]
 endingsAa = ["αν", "αι", "ων", "αις", "ας"]
 endingsAe = ["ης", "ην", "αι", "ων", "αις", "ας"]
+endingsK = ["ι", "ος", "α", "ες", "ων", "σι", "σιν", "ας"]
+endingsKn = ["ι", "ος", "α", "ων", "σι", "σιν", "ας"]
+endingsAdj = ["ου", "ω", "ον", "οι", "ων", "οις", "ους", "ης", "ην", "αι", "ων", "αις", "ας", "α"]
 
 def fillLemmata(lemmata): # lemmata : list
   lemmata_list = []
@@ -18,9 +19,14 @@ def fillLemmata(lemmata): # lemmata : list
     if nom[-2:] == "ος":
       tokens = [lemma[0]]
       tokens.append(nom)
-      for ending in endingsOm:
-        tokens.append(stem + ending)
-      lemmata_list.append(tokens)
+      if len(lemma) > 2 and lemma[2] == "adj":
+        for ending in endingsAdj:
+          tokens.append(stem + ending)
+        lemmata_list.append(tokens)
+      else:
+        for ending in endingsOm:
+          tokens.append(stem + ending)
+        lemmata_list.append(tokens)
     elif nom[-2:] == "ον":
       tokens = [lemma[0]]
       tokens.append(nom)
