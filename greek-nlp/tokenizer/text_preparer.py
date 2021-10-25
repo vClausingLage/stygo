@@ -16,14 +16,7 @@ def joinWords(query_string):
   return query_string
 
 def text_preparer(text):
-    with open(text, "r") as file:
-      text = file.read()
-      if text[0] == "[" or text[0] == "{":
-        text = json.loads(text)
-        text = joinWords(text)
-      else:
-        text = text.split()
-        text = joinWords(text)
+      text = joinWords(text)
       # remove white space
       text = re.sub(" {2,}", " ", text)
       # remove NUMBERS
