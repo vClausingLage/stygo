@@ -66,10 +66,10 @@ nasty_subst = [("ψόγος", "ψόγου"), ("πονος", "πόνου"), ("ἀ
 affectionate_subst = [("γάμος", "γάμου"), ("σωτήρ", "σωτήρος", "m")]; affectionate_adj = []
 nice_subst = [("χαρις", "χάριτος", "f"), ("σεβας", "σέβατος", "n"), ("ἄκος", "ἄκεος", "n")]; nice_adj = [("καλός", "καλοῦ", "adj"), ("ἀγαθος", "ἀγαθου", "adj"), ("φίλος", "φίλου", "adj")]
 
-angry = lem.fillLemmata(angry_subst) + lem.fillLemmata(angry_adj)
-nasty = lem.fillLemmata(nasty_subst) + lem.fillLemmata(nasty_adj)
-affectionate = lem.fillLemmata(affectionate_subst) + lem.fillLemmata(affectionate_adj)
-nice = lem.fillLemmata(nice_subst) + lem.fillLemmata(nice_adj)
+angry = lem.subst_lemmata(angry_subst) + lem.subst_lemmata(angry_adj)
+nasty = lem.subst_lemmata(nasty_subst) + lem.subst_lemmata(nasty_adj)
+affectionate = lem.subst_lemmata(affectionate_subst) + lem.subst_lemmata(affectionate_adj)
+nice = lem.subst_lemmata(nice_subst) + lem.subst_lemmata(nice_adj)
 
 lemmata = {"angry": angry, "nasty": nasty, "affectionate": affectionate, "nice": nice}
 
@@ -88,6 +88,10 @@ for author in authors:
   # print("writing file...")
   # with open("lemmatizedText.txt", "a") as f:
   #   f.write(author["normalized text"])
+
+def lemmatizeVerbs(text,verb_lemmata):
+  print(verb_lemmata)
+
 
 text_total = authors[0]["normalized text"] + authors[1]["normalized text"] + authors[2]["normalized text"]
 def word_count(text):
@@ -119,9 +123,9 @@ for author in authors:
   author["nasty"] = findToken(author["normalized text"], nasty)
   author["affectionate"] = findToken(author["normalized text"], affectionate)
   author["nice"] = findToken(author["normalized text"], nice)
-  author["normalized text"] = ""
+  # author["normalized text"] = ""
   print(author["author"] + " done")
-# results = {"total": text_length, "angry": findToken(text, angry), "nasty": findToken(text, nasty), "affectionate": findToken(text, affectionate), "nice": findToken(text, nice)}
+
 print("writing file...")
 with open("resultData.json", "w") as f:
   output = json.dumps(authors, ensure_ascii=False, indent=2)

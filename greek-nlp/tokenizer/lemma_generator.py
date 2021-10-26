@@ -8,7 +8,7 @@ endingsK = ["ι", "ος", "α", "ες", "ων", "σι", "σιν", "ας"]
 endingsKn = ["ι", "ος", "α", "ων", "σι", "σιν", "ας"]
 endingsAdj = ["ου", "ω", "ον", "οι", "ων", "οις", "ους", "ης", "ην", "αι", "ων", "αις", "ας", "α"]
 
-def fillLemmata(lemmata): # lemmata : list
+def subst_lemmata(lemmata): # lemmata : list
   lemmata_list = []
   for lemma in lemmata:
     nom = lemma[0]
