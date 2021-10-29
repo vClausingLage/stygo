@@ -123,7 +123,7 @@ for author in authors:
   author["nasty"] = findToken(author["normalized text"], nasty)
   author["affectionate"] = findToken(author["normalized text"], affectionate)
   author["nice"] = findToken(author["normalized text"], nice)
-  # author["normalized text"] = ""
+  author["normalized text"] = ""
   print(author["author"] + " done")
 
 print("writing file...")

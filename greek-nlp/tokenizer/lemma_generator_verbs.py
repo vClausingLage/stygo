@@ -2,8 +2,8 @@
 
 optative = "οι"
 augment = "ε"
-temp_sign_aor_fut = "σ"
-temp_sign_perf = "κ"
+temp_aor_fut = "σ"
+temp_perf = "κ"
 pers_pres = ["ω", "εις", "ει", "ετον", "ετον", "ομεν", "ετε", "ουσι", "ουσιν", "ειν"]
 pers_pres_mid = ["ο", "ομαι", "η", "εται", "ομεθα", "εσθε", "ονται", "εσθαι"]
 pers_pres_conj = ["ω" "ης" "η" "ωμεν" "ητε" "ωσι" "ωσιν"]
@@ -11,12 +11,11 @@ pers_pres_mid_conj = ["ωμαι", "η", "ηται", "ωμεθα", "ησθε", "�
 pers_pres_opt = []
 pers_pres_mid_opt = []
 pers_pres_fut_opt = []
-pers_sec = ["ον", "ες", "εν", "ε", "ομεν", "ετε"]
+present = [x for x in [pers_pres, pers_pres_mid, pers_pres_conj, pers_pres_mid_conj, pers_pres_opt, pers_pres_mid_opt, pers_pres_fut_opt]]
+pers_imperf = ["ον", "ες", "εν", "ε", "ομεν", "ετε"]
 pers_aor = []
 pers_perf = []
 stem = "βαλλω"
-
-print(pers_pres_fut_opt)
 
 # make pres
 def agglutinate(*args):
@@ -34,5 +33,5 @@ def agglutinate(*args):
   if stem[-2] != "ο" or stem[-2] != "α" or stem[-2] != "ε":
     stem = stem[:-1]
     return augment + stem + temp_sign + ending
-forms_present = [agglutinate(stem, ending) for ending in pers_pres]
+forms_present = [agglutinate(stem, ending) for ending in present]
 print(forms_present)

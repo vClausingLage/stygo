@@ -9,7 +9,7 @@ stems_decl_full = {
 
 # add stems
 # # ONLY substantives and adjectives!
-# RULE : semantic | declination || conjugation
+# RULE : semantics | declination || conjugation
 angry_o = "φόβος πόλεμος"
 angry_a = "βλάβη ὀργή αἰσχύνη"
 angry_k = ""
