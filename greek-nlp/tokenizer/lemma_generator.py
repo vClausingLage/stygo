@@ -6,6 +6,7 @@ endingsAa = ["αν", "αι", "ων", "αις", "ας"]
 endingsAe = ["ης", "ην", "αι", "ων", "αις", "ας"]
 endingsK = ["ι", "ος", "α", "ες", "ων", "σι", "σιν", "ας"]
 endingsKn = ["ι", "ος", "α", "ων", "σι", "σιν", "ας"]
+endingsKatt =  ["ους", "ει", "η", "ῶν", "εσιν", "εσι", "εος", "εα", "έων"]
 endingsAdj = ["ου", "ω", "ον", "οι", "ων", "οις", "ους", "ης", "ην", "αι", "ων", "αις", "ας", "α"]
 
 def subst_lemmata(lemmata): # lemmata : list
@@ -42,6 +43,10 @@ def subst_lemmata(lemmata): # lemmata : list
         lemmata_list.append(tokens)
       elif lemma[2] == "m" or lemma[2] == "f":
         for ending in endingsK:
+          tokens.append(stem + ending)
+        lemmata_list.append(tokens)
+      elif lemma[2] == "att":
+        for ending in endingsKatt:
           tokens.append(stem + ending)
         lemmata_list.append(tokens)
       else:
