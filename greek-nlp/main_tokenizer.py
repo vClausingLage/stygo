@@ -17,7 +17,7 @@ sophocles = text_preparer.text_preparer(text[1]["text"])
 euripides = text_preparer.text_preparer(text[2]["text"])
 
 print("1. text loaded and prepared")
-with open("normalizedText.txt", "w") as f:
+with open("output/normalizedText.txt", "w") as f:
   data = [
     {"author": text[0]["author"], "normalized text": aeschylus},
     {"author": text[1]["author"], "normalized text": sophocles},
@@ -115,7 +115,7 @@ def word_count(text):
   return counts
 print("4. sorting counted words")
 print("writing file...")
-with open("wordCount.txt", "w") as f:
+with open("output/wordCount.txt", "w") as f:
   f.write(str(word_count(text_total)))
 
 def findToken(text, query_list):
@@ -136,6 +136,6 @@ for author in authors:
   print(author["author"] + " done")
 
 print("writing file...")
-with open("resultData.json", "w") as f:
+with open("output/resultData.json", "w") as f:
   output = json.dumps(authors, ensure_ascii=False, indent=2)
   f.write(output)
