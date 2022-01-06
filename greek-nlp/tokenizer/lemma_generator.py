@@ -50,7 +50,7 @@ def subst_lemmata(lemmata): # lemmata : list
           tokens.append(stem + ending)
         lemmata_list.append(tokens)
       else:
-        print("missing genus declaration")
+        print("missing genus declaration", lemma)
     elif nom[-1] == "α":
       tokens = [lemma[0]]
       tokens.append(nom)
@@ -64,5 +64,5 @@ def subst_lemmata(lemmata): # lemmata : list
         tokens.append(stem + ending)
       lemmata_list.append(tokens)
     else:
-      print("lemma not found")
+      print("lemma not found", lemma)    
   return lemmata_list
