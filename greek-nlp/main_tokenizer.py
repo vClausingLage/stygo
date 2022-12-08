@@ -1,6 +1,5 @@
 import json
 import re
-import gc
 # from tokenizer import morphology_generator
 # from tokenizer import query_tokens_generator
 from tokenizer import text_preparer
