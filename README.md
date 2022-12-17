@@ -15,3 +15,12 @@ This app **scrapes**, **tokenizes**, and **analyzes** Ancient Greek texts. Its m
 **test_for_tokens.py** count tokens by _word stem_
 **tragedistsText.json** **tragedistsData.json** output files (automatically generated)
 **viTragedists.py** old version, was used to generate data for webpage
+
+# Greek NLP
+
+## usage
+
+- run main_tokenizer.py
+  - program: /tokenizer
+    - ARCHIVE: Hamming-Distance | Levenstein-Distance
+  - output: /output
