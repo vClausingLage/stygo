@@ -5,17 +5,17 @@ from tokenizer import noise_terms
 
 # get text from JSON
 with open('tragedistsTexts.json', 'r', encoding='utf8') as file:
-    data = file.read()
-    data = json.loads(data)
-    if data[0]["author"] == "aeschylus":
-      aeschylus_text = data[0]["text"]
-      print("Aeschylus loaded")
-    if data[1]["author"] == "sophocles":
-      sophocles_text = data[1]["text"]
-      print("Sophocles loaded")
-    if data[2]["author"] == "euripides":
-      euripides_text = data[2]["text"]
-      print("Euripides loaded")
+  data = file.read()
+  data = json.loads(data)
+  if data[0]["author"] == "aeschylus":
+    aeschylus_text = data[0]["text"]
+    print("Aeschylus loaded")
+  if data[1]["author"] == "sophocles":
+    sophocles_text = data[1]["text"]
+    print("Sophocles loaded")
+  if data[2]["author"] == "euripides":
+    euripides_text = data[2]["text"]
+    print("Euripides loaded")
 
 # join disjunct tokens
 def joinWords(query_string):
