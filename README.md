@@ -10,7 +10,7 @@ This app **scrapes**, **tokenizes**, and **analyzes** Ancient Greek texts. Its m
 
 ## usage
 
-**scrapeTragedists.py** scrape _PERSEUS_ for texts
+**scrapeTragedists.py** scrape _PERSEUS_ for texts -> very effective _auto search_ for pages
 **scrapeRomans.py** _TO DO!_
 **test_for_tokens.py** count tokens by _word stem_
 **tragedistsText.json** **tragedistsData.json** output files (automatically generated)
