@@ -97,7 +97,7 @@ for author in authors:
   # with open("lemmatizedText.txt", "a") as f:
   #   f.write(author["normalized text"])
 
-def lemmatizeVerbs(text,verb_lemmata):
+def lemmatizeVerbs(text,verb_lemmata): # ! TO DO
   print(verb_lemmata)
 
 
