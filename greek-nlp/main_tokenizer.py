@@ -24,7 +24,7 @@ with open("output/normalizedText.txt", "w") as f:
   ]
   data = json.dumps(data, ensure_ascii=False, indent=2)
   f.write(data)
-# make VARS
+# init Author Objects
 authors = [
   {
     "author": text[0]["author"],
